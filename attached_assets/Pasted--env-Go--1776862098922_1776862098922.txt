@@ -1,0 +1,91 @@
+Для того чтобы подключить базу данных, используя данные из `.env` файла в проекте на Go, вам нужно выполнить три основных шага: загрузить файл, считать переменные и передать их в функцию подключения.
+
+Вот готовый пример реализации:
+
+### 1. Установите библиотеку для работы с .env
+Самая популярная библиотека — `godotenv`. Установите её через терминал:
+```bash
+go get github.com/joho/godotenv
+```
+
+### 2. Подготовьте файл .env
+Убедитесь, что в корне вашего проекта (там, где `main.go`) лежит файл `.env` с правильными данными:
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=marketing_user
+DB_PASSWORD=ваш_пароль
+DB_NAME=marketing_courses
+DB_SSLMODE=disable
+```
+
+### 3. Напишите код подключения в Go
+Вам нужно импортировать `os` для чтения переменных и `godotenv` для их загрузки.
+
+```go
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq" // Драйвер для PostgreSQL
+)
+
+func main() {
+	// 1. Загружаем файл .env
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Ошибка загрузки файла .env")
+	}
+
+	// 2. Считываем переменные окружения
+	host     := os.Getenv("DB_HOST")
+	port     := os.Getenv("DB_PORT")
+	user     := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	dbname   := os.Getenv("DB_NAME")
+	sslmode  := os.Getenv("DB_SSLMODE")
+
+	// 3. Формируем строку подключения (DSN)
+	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+		host, port, user, password, dbname, sslmode)
+
+	// 4. Открываем соединение с БД
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	// 5. Проверяем подключение
+	err = db.Ping()
+	if err != nil {
+		log.Fatal("Не удалось подключиться к базе:", err)
+	}
+
+	fmt.Println("Успешное подключение к PostgreSQL!")
+}
+```
+
+### Почему стоит делать именно так?
+1.  **Безопасность**: Вы не «зашиваете» пароли прямо в код. Если вы выложите код на GitHub, файл `.env` (добавленный в `.gitignore`) останется только у вас.
+2.  **Гибкость**: Если база переедет на другой сервер или порт, вам достаточно будет поменять одну строчку в текстовом файле, не пересобирая всё приложение.
+
+### Если вы используете одну строку `DATABASE_URL`
+Если в вашем проекте (как на скриншоте) используется одна длинная строка, код будет ещё проще:
+
+```go
+func main() {
+    godotenv.Load()
+    dbURL := os.Getenv("DATABASE_URL")
+    
+    db, err := sql.Open("postgres", dbURL)
+    // ... проверка ошибок и Ping
+}
+```
+
+**Обратите внимание**: При первом запуске в новой базе данных (которую вы создали на предыдущем шаге), если ваш код содержит логику миграций, он автоматически создаст все необходимые таблицы.

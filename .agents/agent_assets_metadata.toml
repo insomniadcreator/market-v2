@@ -1,0 +1,32 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "UawJJVLaavErrEchTZgOj"
+uri = "file://artifacts/marketing-courses/src/assets/images/course-digital-marketing.png"
+type = "image"
+title = "Digital Marketing Course Cover"
+
+[[generated]]
+id = "M04CFp5lLza91W5RpATOr"
+uri = "file://artifacts/marketing-courses/src/assets/images/course-smm.png"
+type = "image"
+title = "SMM Course Cover"
+
+[[generated]]
+id = "m08bklZeKj1aYQae2SWJO"
+uri = "file://artifacts/marketing-courses/src/assets/images/course-analytics.png"
+type = "image"
+title = "Analytics Course Cover"
+
+[[generated]]
+id = "hwQVf3K4WYBOhWoo5cyez"
+uri = "file://artifacts/marketing-courses/src/assets/images/course-copywriting.png"
+type = "image"
+title = "Copywriting Course Cover"
+
+[[generated]]
+id = "7lm0pkAGMTqXaxF-daTrH"
+uri = "file://artifacts/marketing-courses/src/assets/images/course-seo.png"
+type = "image"
+title = "SEO Course Cover"
