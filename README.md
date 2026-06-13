@@ -104,8 +104,8 @@ GRANT ALL ON SCHEMA public TO mpuser;
 3. Откройте `.env` в любом редакторе и впишите свои данные. Самая простая форма — одна строка подключения:
 
    ```env
-   DATABASE_URL=postgres://mpuser:mppass123@localhost:5432/marketingpro?sslmode=disable
-   ADMIN_SECRET=admin123
+   DATABASE_URL=postgres://mpuser:Your3@localhost:Your/Your?sslmode=disable
+   ADMIN_SECRET=Your
    PORT=3000
    ```
 
@@ -113,12 +113,12 @@ GRANT ALL ON SCHEMA public TO mpuser;
 
    ```env
    DB_HOST=localhost
-   DB_PORT=5432
-   DB_USER=mpuser
-   DB_PASSWORD=mppass123
-   DB_NAME=marketingpro
+   DB_PORT=Your
+   DB_USER=Your
+   DB_PASSWORD=Your
+   DB_NAME=Your
    DB_SSLMODE=disable
-   ADMIN_SECRET=admin123
+   ADMIN_SECRET=Your
    PORT=3000
    ```
 
@@ -137,17 +137,17 @@ GRANT ALL ON SCHEMA public TO mpuser;
 
 **Windows (PowerShell):**
 ```powershell
-$env:DATABASE_URL="postgres://mpuser:mppass123@localhost:5432/marketingpro?sslmode=disable"
+$env:DATABASE_URL="postgres://mpuser:Your3@localhost:Your/Your?sslmode=disable"
 ```
 
 **Windows (cmd.exe):**
 ```cmd
-set DATABASE_URL=postgres://mpuser:mppass123@localhost:5432/marketingpro?sslmode=disable
+set DATABASE_URL=postgres://mpuser:Your3@localhost:Your/Your?sslmode=disable
 ```
 
 **macOS / Linux:**
 ```bash
-export DATABASE_URL="postgres://mpuser:mppass123@localhost:5432/marketingpro?sslmode=disable"
+export DATABASE_URL="postgres://mpuser:Your3@localhost:Your/Your?sslmode=disable"
 ```
 
 ---
@@ -178,7 +178,7 @@ go run .
 
 1. Зарегистрируйтесь в приложении (любой email и пароль).
 2. Зайдите в раздел **Профиль** → кнопка **«Стать администратором»**.
-3. Введите секретный код — по умолчанию **`admin123`** (или то, что задали в `ADMIN_SECRET`).
+3. Введите секретный код — по умолчанию **`Your** (или то, что задали в `ADMIN_SECRET`).
 4. После активации в меню появится раздел **Админ-панель**, где можно создавать, редактировать и удалять курсы.
 
 ---
